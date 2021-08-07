@@ -52,7 +52,7 @@ sed -i 's/.bim//g' ForMerge.list
 nohup /export/home/guiyuanyuan/tools/plink --merge-list ForMerge.list --out Merge_chrALL_brain_dup &
 #去重复
 awk '{print $1,$4}' Merge_chrALL_brain_dup.bim |sort|uniq -d > dup_snp
-awk 'NR==FNR{a[$1" "$2]=$0;next}{if(!($1" "$4 in a)print $2}' dup_snp Merge_chrALL_brain_dup.bim > nodup_snp
+awk 'NR==FNR{a[$1" "$2]=$0;next}{if(!($1" "$4 in a))print $2}' dup_snp Merge_chrALL_brain_dup.bim > nodup_snp
 /export/home/guiyuanyuan/tools/plink --bfile Merge_chrALL_brain_dup --extract nodup_snp --make-bed --out Merge_chrALL_brain
 sh step2_qc.sh #redone qc
 
