@@ -4,15 +4,17 @@ done
 vim gc ;Trait rg se z p_0 
 
 a<-read.table("gc",header=T)
-a<-within(a,{p_1=1-pnorm((1-rg)/se)})
+a<-within(a,{p_1=1-pnorm((1-rg)/se)}) #significant difference from 1 
 write.table(a,"between_sex_rg",quote=F,row.names=F)
 
 #method 1
 awk '$2+1.96*$3<1 && $2<0.6' between_sex_rg > vol_low_hg
 awk '{print $1}' vol_low_hg > vol_low_header
-#method
-
-
+#method2
+python BH_adjust.py
+vim Trait rg se z p_0 p_1 q_1
+awk '$7<0.05' between_sex_rg_BH
+awk '$6<0.05/159' between_sex_rg 
 
 #linear_5e-8
 for i in `cat vol_low_header`;do awk '$12<5e-8' /lustre/home/acct-clslh/clslh/gyy/UKB/assoc_male/male_linear/${i}.glm.linear > vol_low_M_${i}_5e-8;done
