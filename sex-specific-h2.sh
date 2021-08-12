@@ -22,4 +22,4 @@ b<-within(b,{z=(f_h2-m_h2)/sqrt(f_se^2+m_se^2)
           p=2*pnorm((f_h2-m_h2)/sqrt(f_se^2+m_se^2))})
 write.table(b,"LDSC_inter_h2_neg",quote=F,row.names=F,col.names=F)
 
-cat LDSC_inter_h2_neg LDSC_inter_h2_pos > LDSC_inter_h2
+cat LDSC_inter_h2_pos LDSC_inter_h2_neg  > LDSC_inter_h2
