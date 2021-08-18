@@ -1,0 +1,3 @@
+python /data1/tmp/wangzhaobin/UKB/gyy_ukb/UKB_vol/phenotype_sex-difference/BH.py
+awk '{if($5<0.05 && $3>0 && $4=="ttest"){$6="M<F"}if($5<0.05 && $3<0 && $4=="ttest"){$6="M>F"}if($5<0.05 && $3-$4>0 && $4!="ttest"){$6="M<F"}if($5<0.05 && $3-$4<0 && $4!="ttest"){$6="M>F"};print}' EUR_test_1_BH| awk '(NR>1){Trait=$1;p=$2;p_BH=$5;test=$6}(NR==1){print "Trait p p_BH test"}(NR>1){print Trait,p,p_BH,test}' > EUR_test_2
+for i in `cat test`;do awk '{if($5<0.05 && $3>0 && $4=="ttest"){$6="M<F"}if($5<0.05 && $3<0 && $4=="ttest"){$6="M>F"}if($5<0.05 && $3-$4>0 && $4!="ttest"){$6="M<F"}if($5<0.05 && $3-$4<0 && $4!="ttest"){$6="M>F"};print}' ${i}_test_1_BH| awk '{Trait=$1;p=$2;p_BH=$5;test=$6}(NR==1){print "Trait p p_BH test"}{print Trait,p,p_BH,test}' > ${i}_test_2;done
