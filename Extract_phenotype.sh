@@ -79,4 +79,10 @@ cat covar_header covar_0 > covar_d_f
 awk 'NR==FNR{a[$1]=$2" "$3" "$4;next}{if($1 in a)print $0,a[$1]}' ~/ancestry/EUR_6 Merge_brain_prune.eigenvec > covar_1
 cat covar_header1 covar_1 > covar_vol
 ##linear vol的cor多一个，回归的header另写
+(awk 'NR==FNR{a[$1]=$2" "$3;next}{if($1 in a)print $0,a[$1]}' EUR_5 Merge_brain_prune.eigenvec|awk '$24==1'|awk '{$NF="" ;print $0}' > covar_m_novbt_0
+cat 1 covar_m_novbt_0 > covar_m_novbt
+awk 'NR==FNR{a[$1]=$2" "$3" "$9;next}{if($1 in a)print $0,a[$1]}' EUR_5 Merge_brain_prune.eigenvec|awk '$24==1' > 2
+a<-read.table("2")
+b=a[,-24]
+write.table(b,"covar_f_vbt_0",quote=F,row.names=F,col.names=F)  )
 
