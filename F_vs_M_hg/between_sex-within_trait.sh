@@ -1,12 +1,16 @@
 rm gc;for i in `cat ../../header_vol`;do 
-tail -n 4 ${i}_inter_hg.log|head -n 1|awk '{print "'$i'",$3,$4,$5,$6}' >>gc
+tail -n 4 tbv_rg/tbv_${i}_inter_hg.log|head -n 1|awk '{print "'$i'",$3,$4,$5,$6}' >>gc
 done
 vim gc ;Trait rg se z p_0 
+awk '$2>=0' gc > pos_gc
+awk '$2<0' gc > neg_gc
 
-a<-read.table("gc",header=T)
+a<-read.table("pos_gc",header=T)
 a<-within(a,{p_1=1-pnorm((1-rg)/se)}) #significant difference from 1 
-write.table(a,"between_sex_rg",quote=F,row.names=F)
-
+write.table(a,"pos_between_sex_rg",quote=F,row.names=F)
+b<-read.table("neg_gc",header=T)
+b<-within(a,{p_1=1-pnorm((1+rg)/se)})
+write.table(b,"neg_between_sex_rg",quote=F,row.names=F)
 #method 1
 awk '$2+1.96*$3<1 && $2<0.6' between_sex_rg > vol_low_hg
 awk '{print $1}' vol_low_hg > vol_low_header
