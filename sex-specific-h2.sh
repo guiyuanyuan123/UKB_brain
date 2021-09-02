@@ -6,8 +6,8 @@ for i in `cat ../../header_vol`;do
 grep -w 'Total Observed scale h2:' tbv_inter/tbv_${i}_h2.log|awk -F":" '{print "'${i}'",$2}'|grep -wv 'NA' >> tbv_male_inter_h2;
 done
 
-paste female/tbv_female_inter_h2 male/tbv_male_inter_h2 |awk '{print $1,$2,$3,$5,$6}' |awk -F"(" '{print $1,$2,$3}'|awk -F")" '{print $1,$2,$3}'|awk '$2>$4' > tbv_pos_zscore
-paste female/tbv_female_inter_h2 male/tbv_male_inter_h2 |awk '{print $1,$2,$3,$5,$6}' |awk -F"(" '{print $1,$2,$3}'|awk -F")" '{print $1,$2,$3}'|awk '$2<$4' > tbv_neg_zscore
+paste female/tbv_female_inter_h2 male/tbv_male_inter_h2 |awk '{print $1,$2,$3,$5,$6}' |awk -F"(" '{print $1,$2,$3}'|awk -F")" '{print $1,$2,$3}'|awk '$2>$4' > tbv_inter_pos_zscore
+paste female/tbv_female_inter_h2 male/tbv_male_inter_h2 |awk '{print $1,$2,$3,$5,$6}' |awk -F"(" '{print $1,$2,$3}'|awk -F")" '{print $1,$2,$3}'|awk '$2<$4' > tbv_inter_neg_zscore
 
 a<-read.table("tbv_pos_zscore")
 colnames(a)<-c("Trait","f_h2","f_se","m_h2","m_se")
