@@ -40,9 +40,7 @@ recode.snps <- txt$SNP %in% info.recode$SNP
 tmp <- txt[recode.snps,]$B.A1
 txt[recode.snps,]$B.A1 <- txt[recode.snps,]$B.A2
 txt[recode.snps,]$B.A2 <- tmp
-
-recode.beta <- txt$Z %in% info.recode$Z
-txt[recode.beta,]$Z <- txt[recode.beta,]$Z * (-1)
+txt[recode.snps,]$Z <- txt[recode.snps,]$Z * (-1)
 
 
 # identify SNPs that need recoding & complement
