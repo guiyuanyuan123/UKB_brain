@@ -50,8 +50,7 @@ com.snps <- txt$SNP %in% info.crecode$SNP
 tmp <- txt[com.snps,]$B.A1
 txt[com.snps,]$B.A1 <- sapply(txt[com.snps,]$B.A2, complement)
 txt[com.snps,]$B.A2 <- sapply(tmp, complement)
-com.beta <- txt$Z %in% info.crecode$Z
-txt[com.beta,]$Z <- txt[com.beta,]$Z *(-1)
+txt[com.snps,]$Z <- txt[com.snps,]$Z *(-1)
 
 colnames(txt)<- c("SNP", "A1", "A2","N","Z")
 
