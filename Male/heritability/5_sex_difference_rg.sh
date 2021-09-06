@@ -9,7 +9,7 @@ a<-read.table("pos_gc",header=T)
 a<-within(a,{p_1=1-pnorm((1-rg)/se)}) #significant difference from 1 
 write.table(a,"pos_between_sex_rg",quote=F,row.names=F)
 b<-read.table("neg_gc",header=T)
-b<-within(a,{p_1=1-pnorm((1+rg)/se)})
+b<-within(b,{p_1=1-pnorm((1+rg)/se)})
 write.table(b,"neg_between_sex_rg",quote=F,row.names=F)
 #method 1
 awk '$2+1.96*$3<1 && $2<0.6' between_sex_rg > vol_low_hg
