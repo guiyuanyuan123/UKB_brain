@@ -78,6 +78,7 @@ head -n 1 ~/UKB/brain_imaging/zhaohan_rfmri/covar > covar_header
 cat covar_header covar_0 > covar_d_f
 awk 'NR==FNR{a[$1]=$2" "$3" "$4;next}{if($1 in a)print $0,a[$1]}' ~/ancestry/EUR_6 Merge_brain_prune.eigenvec > covar_1
 cat covar_header1 covar_1 > covar_vol
+
 ##linear vol的cor多一个，回归的header另写
 (awk 'NR==FNR{a[$1]=$2" "$3;next}{if($1 in a)print $0,a[$1]}' EUR_5 Merge_brain_prune.eigenvec|awk '$24==1'|awk '{$NF="" ;print $0}' > covar_m_novbt_0
 cat 1 covar_m_novbt_0 > covar_m_novbt
@@ -85,4 +86,27 @@ awk 'NR==FNR{a[$1]=$2" "$3" "$9;next}{if($1 in a)print $0,a[$1]}' EUR_5 Merge_br
 a<-read.table("2")
 b=a[,-24]
 write.table(b,"covar_f_vbt_0",quote=F,row.names=F,col.names=F)  )
+
+########################################################################################################################################################
+awk '$12=="f.22027.0.0" || $12=="NA"' cleaned_brain_imageing_phenotype.tab |awk '$11=="0" || $11=="f.22021.0.0"'> raw
+awk '$2=="4001" || $3=="4001" ||$4=="4001" || $2=="4002" || $3=="4002" ||$4=="4002" || $2=="f.21000.0.0"' raw > AFR_1
+AFR_1 <- read.table("~/ancestry/AFR_1",header=T) #6430
+list <-which(rowSums(is.na(AFR_1[,-c(2:12)])) > 311)
+x_full<-AFR_1[-list,-c(2,3,4,5,6,8,10:12)]
+dim(x_full) # 184 634
+write.tab
+
+awk '$2=="3001" || $3=="3001" ||$4=="3001" || $2=="3002" || $3=="3002" ||$4=="3002" || $2=="3003" || $3=="3003" ||$4=="3003"|| $2=="f.21000.0.0"' raw > SAS_1
+SAS_1 <- read.table("~/ancestry/SAS_1",header=T) #6441
+list <-which(rowSums(is.na(SAS_1[,-c(2:12)])) > 311)
+x_full<-SAS_1[-list,]
+dim(x_full) #259 634
+
+awk '$2=="5" || $3=="5" ||$4=="5" || $2=="f.21000.0.0"' raw > EAS_1
+EAS_1<-read.table("~/ancestry/EAS_1",header=T) #1355
+list <-which(rowSums(is.na(EAS_1[,-c(2:12)])) > 311)
+x_full<-EAS_1[-list,-c(2,3,4,5,6,8,10:12)]
+write.table(x_full,"~/ancestry/EAS_2",quote=F,row.names=F)
+
+
 
