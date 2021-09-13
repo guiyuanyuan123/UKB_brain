@@ -38,8 +38,8 @@ p_EUR =var.test(EUR[EUR$f.22001.0.0==0,j],EUR[EUR$f.22001.0.0==1,j])$p.value
 }
 }
 colnames(wtest_EUR)<-c("V1","tp","ts")
-t_test <- rbind(tst_EUR,wtest_EUR)
-write.table(t_test,"/data1/tmp/wangzhaobin/UKB/gyy_ukb/UKB_vol/phenotype_sex-difference/raw/raw_EUR_t_test",row.names=F,quote=F)
+EURt_test <- rbind(tst_EUR,wtest_EUR)
+write.table(EURt_test,"/data1/tmp/wangzhaobin/UKB/gyy_ukb/UKB_vol/phenotype_sex-difference/raw/raw_EUR_t_test",row.names=F,quote=F)
 
 
 #AFR
@@ -79,9 +79,9 @@ colnames(wtest_AFR) <- c("V1","tp","ts")
 colnames(twst_AFR)<-c("V1","tp","ts")
 tst_AFR$ts <- as.numeric(as.character(ts))
 twst_AFR$ts <- as.numeric(as.character(twst_AFR$ts))
-t_test <- rbind(tst_AFR,twst_AFR,wtest_AFR)
+AFRt_test <- rbind(tst_AFR,twst_AFR,wtest_AFR)
 
-write.table(t_test,"/data1/tmp/wangzhaobin/UKB/gyy_ukb/UKB_vol/phenotype_sex-difference/raw/raw_AFR_t_test",row.names=F,quote=F)
+write.table(AFRt_test,"/data1/tmp/wangzhaobin/UKB/gyy_ukb/UKB_vol/phenotype_sex-difference/raw/raw_AFR_t_test",row.names=F,quote=F)
 
 #EAS
 for (j in 5:dim(EAS)[2]){
@@ -120,9 +120,9 @@ colnames(wtest_EAS) <- c("V1","tp","ts")
 colnames(twst_EAS)<-c("V1","tp","ts")
 tst_EAS$ts <- as.numeric(as.character(ts))
 twst_EAS$ts <- as.numeric(as.character(twst_EAS$ts))
-t_test <- rbind(tst_EAS,twst_EAS,wtest_EAS)
+EASt_test <- rbind(tst_EAS,twst_EAS,wtest_EAS)
 
-write.table(t_test,"/data1/tmp/wangzhaobin/UKB/gyy_ukb/UKB_vol/phenotype_sex-difference/raw/raw_EAS_t_test",row.names=F,quote=F)
+write.table(EASt_test,"/data1/tmp/wangzhaobin/UKB/gyy_ukb/UKB_vol/phenotype_sex-difference/raw/raw_EAS_t_test",row.names=F,quote=F)
 
 #SAS
 for (j in 5:dim(SAS)[2]){
@@ -162,6 +162,9 @@ colnames(wtest_SAS) <- c("V1","tp","ts")
 colnames(twst_SAS)<-c("V1","tp","ts")
 tst_SAS$ts <- as.numeric(as.character(ts))
 twst_SAS$ts <- as.numeric(as.character(twst_SAS$ts))
-t_test <- rbind(tst_SAS,twst_SAS,wtest_SAS)
+SASt_test <- rbind(tst_SAS,twst_SAS,wtest_SAS)
 
-write.table(t_test,"/data1/tmp/wangzhaobin/UKB/gyy_ukb/UKB_vol/phenotype_sex-difference/raw/raw_SAS_t_test",row.names=F,quote=F)
+write.table(SASt_test,"/data1/tmp/wangzhaobin/UKB/gyy_ukb/UKB_vol/phenotype_sex-difference/raw/raw_SAS_t_test",row.names=F,quote=F)
+
+t_test<-rbind(EURt_test,AFRt_test,EASt_test,SASt_test)
+write.table(t_test,"/data1/tmp/wangzhaobin/UKB/gyy_ukb/UKB_vol/phenotype_sex-difference/raw/raw_4race_t_test",row.names=F,quote=F)
