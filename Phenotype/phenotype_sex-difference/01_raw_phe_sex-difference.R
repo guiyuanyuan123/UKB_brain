@@ -38,7 +38,12 @@ p_EUR =var.test(EUR[EUR$f.22001.0.0==0,j],EUR[EUR$f.22001.0.0==1,j])$p.value
 }
 }
 colnames(wtest_EUR)<-c("V1","tp","ts")
+tst_EUR$ts <- as.numeric(as.character(tst_EUR$ts))
+wtest_EUR$ts <- as.numeric(as.character(wtest_EUR$ts))
 EURt_test <- rbind(tst_EUR,wtest_EUR)
+for (i in 1:159){
+        if(EURt_test[i,3] > 0){
+                EURt_test[i,4]="EUR_f"}else{EURt_test[i,4]="EUR_m"}}
 write.table(EURt_test,"/data1/tmp/wangzhaobin/UKB/gyy_ukb/UKB_vol/phenotype_sex-difference/raw/raw_EUR_t_test",row.names=F,quote=F)
 
 
@@ -77,9 +82,12 @@ wtest_AFR <- within(wtest_AFR,{ts= as.numeric(as.character(ws))-as.numeric(as.ch
 colnames(wtest_AFR) <- c("V1","tp","ts")
 
 colnames(twst_AFR)<-c("V1","tp","ts")
-tst_AFR$ts <- as.numeric(as.character(ts))
+tst_AFR$ts <- as.numeric(as.character(tst_AFR$ts))
 twst_AFR$ts <- as.numeric(as.character(twst_AFR$ts))
 AFRt_test <- rbind(tst_AFR,twst_AFR,wtest_AFR)
+for (i in 1:159){
+        if(AFRt_test[i,3] > 0){
+                AFRt_test[i,4]="AFR_f"}else{AFRt_test[i,4]="AFR_m"}}
 
 write.table(AFRt_test,"/data1/tmp/wangzhaobin/UKB/gyy_ukb/UKB_vol/phenotype_sex-difference/raw/raw_AFR_t_test",row.names=F,quote=F)
 
@@ -118,9 +126,12 @@ wtest_EAS <- within(wtest_EAS,{ts= as.numeric(as.character(ws))-as.numeric(as.ch
 colnames(wtest_EAS) <- c("V1","tp","ts")
 
 colnames(twst_EAS)<-c("V1","tp","ts")
-tst_EAS$ts <- as.numeric(as.character(ts))
+tst_EAS$ts <- as.numeric(as.character(tst_EAS$ts))
 twst_EAS$ts <- as.numeric(as.character(twst_EAS$ts))
 EASt_test <- rbind(tst_EAS,twst_EAS,wtest_EAS)
+for (i in 1:159){
+        if(EASt_test[i,3] > 0){
+                EASt_test[i,4]="EAS_f"}else{EASt_test[i,4]="EAS_m"}}
 
 write.table(EASt_test,"/data1/tmp/wangzhaobin/UKB/gyy_ukb/UKB_vol/phenotype_sex-difference/raw/raw_EAS_t_test",row.names=F,quote=F)
 
@@ -160,10 +171,12 @@ wtest_SAS <- within(wtest_SAS,{ts= as.numeric(as.character(ws))-as.numeric(as.ch
 colnames(wtest_SAS) <- c("V1","tp","ts")
 
 colnames(twst_SAS)<-c("V1","tp","ts")
-tst_SAS$ts <- as.numeric(as.character(ts))
+tst_SAS$ts <- as.numeric(as.character(tst_SAS$ts))
 twst_SAS$ts <- as.numeric(as.character(twst_SAS$ts))
 SASt_test <- rbind(tst_SAS,twst_SAS,wtest_SAS)
-
+for (i in 1:159){
+        if(SASt_test[i,3] > 0){
+                SASt_test[i,4]="SAS_f"}else{SASt_test[i,4]="SAS_m"}}
 write.table(SASt_test,"/data1/tmp/wangzhaobin/UKB/gyy_ukb/UKB_vol/phenotype_sex-difference/raw/raw_SAS_t_test",row.names=F,quote=F)
 
 t_test<-rbind(EURt_test,AFRt_test,EASt_test,SASt_test)
