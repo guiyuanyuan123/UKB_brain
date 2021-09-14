@@ -26,13 +26,12 @@ vif_AFR= vif(lm(AFR[,6] ~ AFR$f.25010.2.0 + AFR$f.21003.2.0 + AFR$f.22001.0.0))
 vif_EAS= vif(lm(EAS[,6] ~ EAS$f.25010.2.0 + EAS$f.21003.2.0 + EAS$f.22001.0.0))
 vif_SAS= vif(lm(SAS[,6] ~ SAS$f.25010.2.0 + SAS$f.21003.2.0 + SAS$f.22001.0.0))
 #sqrt(vif_EUR)>2 False
-
-for (j in 5:dim(EUR)[2]){
 EUR1=cbind(EUR,EUR$f.21003.2.0 * EUR$f.22001.0.0)
 AFR1=cbind(AFR,AFR$f.21003.2.0 * AFR$f.22001.0.0)
 EAS1=cbind(EAS,EAS$f.21003.2.0 * EAS$f.22001.0.0)
 SAS1=cbind(SAS,SAS$f.21003.2.0 * SAS$f.22001.0.0)
 
+for (j in 5:dim(EUR)[2]){
 #EUR
 model= lm(EUR1[,j] ~ EUR1$f.21003.2.0 + EUR1$f.22001.0.0 + EUR1[,164])
 p_combeur <- summary(model)$coeff[4,4]
