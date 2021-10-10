@@ -31,7 +31,10 @@ grep -w 'NA' remove_41_1|wc -l  #663    standing height 2期有663个人没测�
  c=bd[,c(1,2,4,6,8,10,12,14,16)]    #
  write.table(c,"remove_41_0",quote=F,row.names=F)
  ###
-awk '{if($2!="NA"){$2=$2}if($2=="NA" && $3!="NA"){$2=$3};print}' remove_41_0 > remove_41_1 
+awk '{if($2!="NA"){$2=$2}if($2=="NA" && $3!="NA"){$2=$3};print}' remove_41_0 > 1
+a<-read.table("1",header=T)
+b=a[,-3]
+write.table(b,"remove_41_1",quote=F,row.names=F)
 cat remove_41_1 41_1 > EUR_confounder_2
 awk 'NR==FNR{a[$1]=$2" "$4" "$6" "$7" "$8" "$9;next}{if($1 in a)print $0,a[$1]}' EUR_confounder_2 ../EUR_5 > EUR_confounder_3
 
