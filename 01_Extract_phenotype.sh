@@ -9,21 +9,21 @@ colnames(a)
 
 awk '$12=="f.22027.0.0" || $12=="NA"' cleaned_brain_imageing_phenotype.tab |awk '$11=="0" || $11=="f.22021.0.0"'| awk '$10=="f.22006.0.0" || $10=="1"' > EUR_1
 EUR_1<-read.table("EUR_1",header=T)
-list<-which (rowSums(is.na(EUR_1[,-c(2:12)]))>311)
+list<-which (rowSums(is.na(EUR_1[,-c(2:12)]))>160)
 x_full <- EUR_1[-list,-c(2:6,10:12)]
-dim(x_full) #21523   625
+dim(x_full) #22889   324
 write.table(x_full,"EUR_2",quote=F,row.names=F)
  
 #EUR:41/21523 age 全是3期；3/21523 的structures age二期，后面dti rsfmri是三期，统一用的二期
 #41个age
 test<-x_full[,c(1,grep(".2.0$",colnames(x_full)))]
-instance2=which(rowSums(is.na(test))> 256)
+instance2=which(rowSums(is.na(test))> 2)
 instance2_2=test[instance2,]
-write.table(instance2_2,"instance2",quote=F,row.names=F) #41 313
+write.table(instance2_2,"instance2",quote=F,row.names=F) #41 162
 
 test<-x_full[,c(1,grep(".3.0$",colnames(x_full)))]
-instance3=which(rowSums(is.na(test))> 256)
-instance3_2=test[-instance3,]
+instance3=which(rowSums(is.na(test))> 2)
+instance3_2=test[-instance3,] #839 162
 write.table(instance3_2,"instance3",quote=F,row.names=F)
 awk 'NR==FNR{a[$1]=$0;next}{if($1 in a)print $0}' instance2 instance3 |grep NA|wc -l #0
 awk '{print $1}' instance2> header2
