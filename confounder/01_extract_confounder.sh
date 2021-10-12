@@ -36,7 +36,7 @@ a<-read.table("1",header=T)
 b=a[,-3]
 write.table(b,"remove_41_1",quote=F,row.names=F)
 cat remove_41_1 41_1 > EUR_confounder_2
-awk 'NR==FNR{a[$1]=$2" "$4" "$6" "$7" "$8" "$9;next}{if($1 in a)print $0,a[$1]}' EUR_confounder_2 ../EUR_5 > EUR_confounder_3
+awk 'NR==FNR{a[$1]=$2" "$3" "$5" "$6" "$7" "$8;next}{if($1 in a)print $0,a[$1]}' EUR_confounder_2 ../EUR_5 > EUR_confounder_3
 
 
 
