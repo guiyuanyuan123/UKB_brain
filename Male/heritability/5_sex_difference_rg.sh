@@ -2,8 +2,8 @@ rm gc;for i in `cat ../../header_vol`;do
 tail -n 4 tbv_rg/tbv_${i}_inter_hg.log|head -n 1|awk '{print "'$i'",$3,$4,$5,$6}' >>gc
 done
 vim gc ;Trait rg se z p_0 
-awk '$2>=0' gc > pos_gc
-awk '$2<0' gc > neg_gc
+awk '$2-0>=0' gc > pos_gc
+awk '$2-0<0' gc > neg_gc
 
 a<-read.table("pos_gc",header=T)
 a<-within(a,{p_1=1-pnorm((1-rg)/se)}) #significant difference from 1 
