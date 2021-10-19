@@ -23,3 +23,11 @@ b<-within(b,{z=(f_h2-m_h2)/sqrt(f_se^2+m_se^2)
 write.table(b,"tbv_LDSC_inter_h2_neg",quote=F,row.names=F,col.names=F)
 
 cat tbv_LDSC_inter_h2_pos tbv_LDSC_inter_h2_neg  > tbv_LDSC_inter_h2
+
+a<-read.table("confounder_7_LDSC_inter_h2_BH")
+a$V2=round(a$V2,3)
+a$V3=round(a$V3,3)
+a$V4=round(a$V4,3)
+a$V5=round(a$V5,3)
+write.table(a,"confounder_7_LDSC_inter_h2_BH_0",quote=F,row.names=F,col.names=F)
+sort -gk1 confounder_7_LDSC_inter_h2_BH_0|awk '{print $2"("$3")\t"$4"("$5")\t"$7"\t"$6"\t"$8}' > confounder_7_LDSC_inter_h2_BH_1
