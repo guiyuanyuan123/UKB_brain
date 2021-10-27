@@ -92,20 +92,20 @@ awk '$12=="f.22027.0.0" || $12=="NA"' cleaned_brain_imageing_phenotype.tab |awk 
 awk '$2=="4001" || $3=="4001" ||$4=="4001" || $2=="4002" || $3=="4002" ||$4=="4002" || $2=="f.21000.0.0"' raw > AFR_1
 AFR_1 <- read.table("~/ancestry/AFR_1",header=T) #6430  332
 list <-which(rowSums(is.na(AFR_1[,-c(2:12)])) > 160)
-x_full<-AFR_1[-list,-c(2,3,4,5,6,8,10:12)]
+x_full<-AFR_1[-list,-c(2:6,10:12)]
 dim(x_full) # 205 323
 write.tab
 
 awk '$2=="3001" || $3=="3001" ||$4=="3001" || $2=="3002" || $3=="3002" ||$4=="3002" || $2=="3003" || $3=="3003" ||$4=="3003"|| $2=="f.21000.0.0"' raw > SAS_1
 SAS_1 <- read.table("~/ancestry/SAS_1",header=T) #6441
 list <-which(rowSums(is.na(SAS_1[,-c(2:12)])) > 160)
-x_full<-SAS_1[-list,]
+x_full<-SAS_1[-list,-c(2:6,10:12)]
 dim(x_full) #259 634
 
 awk '$2=="5" || $3=="5" ||$4=="5" || $2=="f.21000.0.0"' raw > EAS_1
 EAS_1<-read.table("~/ancestry/EAS_1",header=T) #1355
 list <-which(rowSums(is.na(EAS_1[,-c(2:12)])) > 160)
-x_full<-EAS_1[-list,-c(2,3,4,5,6,8,10:12)]
+x_full<-EAS_1[-list,-c(2:6,10:12)]
 write.table(x_full,"~/ancestry/EAS_2",quote=F,row.names=F)
 
 
